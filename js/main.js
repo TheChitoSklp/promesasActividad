@@ -1,4 +1,4 @@
-let producto = [
+const productos = [
   {
     id: 1,
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -19,8 +19,7 @@ let producto = [
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     category: "men's clothing",
-    image:
-      "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+    image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
     rating: {
       rate: 4.1,
       count: 259,
@@ -54,8 +53,7 @@ let producto = [
   },
   {
     id: 5,
-    title:
-      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
     price: 695,
     description:
       "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
@@ -133,8 +131,7 @@ let producto = [
   },
   {
     id: 11,
-    title:
-      "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+    title: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
     price: 109,
     description:
       "3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
@@ -147,8 +144,7 @@ let producto = [
   },
   {
     id: 12,
-    title:
-      "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+    title: "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
     price: 114,
     description:
       "Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty",
@@ -201,8 +197,7 @@ let producto = [
   },
   {
     id: 16,
-    title:
-      "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
+    title: "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
     price: 29.95,
     description:
       "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
@@ -266,27 +261,53 @@ let producto = [
     },
   },
 ];
-const cardsContainer = document.querySelector(".cards-container");
-const cardTemplate = document.querySelector("#card-template");
+//la wea destructuradora
 
-producto.forEach((item) => {
-  const cardClone = cardTemplate.content.cloneNode(true);
+const $cardContainer = document.createElement("section");
 
-  cardClone.querySelector(".card-image").setAttribute("src", item.image);
-  cardClone.querySelector(".card-title").textContent = item.title;
-  cardClone.querySelector(".card-price").textContent = `$${item.price}`;
-  cardClone.querySelector(".card-description").textContent = item.description;
-  cardClone.querySelector(".card-category").textContent = item.category;
+for (const { title, price, description, category, image } of productos) {
+  //fragment buena practica mas fast
+  const $fragment = document.createDocumentFragment();
+  const $card = `
+            <img src="${image}" class="img">
+            <div class="infoCard">
+            <h4 class="titulo">${title}</h4>
+            <span class="precio">${price}</span>
+            <p class="descripcion">${description}</p>
+            <span class="categoria">${category}</span>
+            </div>`;
 
-  const rating = cardClone.querySelector(".card-rating");
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("i");
-    star.classList.add("fas", "fa-star");
-    if (i <= item.rating.rate) {
-      star.classList.add("active");
-    }
-    rating.appendChild(star);
-  }
+  const $article = document.createElement("article");
+  $article.innerHTML = $card;
+  $fragment.appendChild($article);
+  //este se pone adentro para que  no se creen varios section
+  $cardContainer.appendChild($fragment);
+}
 
-  cardsContainer.appendChild(cardClone);
-});
+document.body.appendChild($cardContainer);
+
+// const cardsContainer = document.querySelector(".cards-container");
+// const cardTemplate = document.querySelector("#card-template");
+
+// producto.forEach((item) => {
+//   const cardClone = cardTemplate.content.cloneNode(true);
+
+//   cardClone.querySelector(".card-image").setAttribute("src", item.image);
+//   cardClone.querySelector(".card-title").textContent = item.title;
+//   cardClone.querySelector(".card-price").textContent = `$${item.price}`;
+//   cardClone.querySelector(".card-description").textContent = item.description;
+//   cardClone.querySelector(".card-category").textContent = item.category;
+
+//   const rating = cardClone.querySelector(".card-rating");
+//   for (let i = 1; i <= 5; i++) {
+//     const star = document.createElement("i");
+//     star.classList.add("fas", "fa-star");
+//     if (i <= item.rating.rate) {
+//       star.classList.add("active");
+//     }
+//     rating.appendChild(star);
+//   }
+
+//   cardsContainer.appendChild(cardClone);
+// });
+// VERSION CHAFA

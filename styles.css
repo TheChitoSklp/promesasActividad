@@ -1,4 +1,41 @@
-.cards {
+body {
+  background-color: rgb(219, 219, 219);
+}
+section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+article {
+  margin: 2rem;
+  border: 1px black solid;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 1px black;
+  width: 300px;
+  background-color: white;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+  opacity: 0.5;
+  padding: 1rem;
+}
+.infoCard {
+  width: 250px;
+  padding: 1rem;
+  text-align: center;
+}
+.descripcion {
+  text-align: start;
+}
+.categoria,
+.precio {
+  font-weight: bold;
+}
+
+/* .cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -69,4 +106,4 @@ li {
 
 .card-body a:hover {
   text-decoration: underline;
-}
+} */
