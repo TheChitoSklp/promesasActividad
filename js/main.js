@@ -29,7 +29,7 @@ getProducto();
 function crearProductos(prods) {
   const $cardContainer = document.createElement("section");
 
-  for (const { title, price, description, category, image } of prods) {
+  prods.forEach(({ title, price, description, category, image }) => {
     const $article = document.createElement("article");
     const $card = `
     <img src="${image}" class="img">
@@ -44,7 +44,7 @@ function crearProductos(prods) {
 
     $article.innerHTML = $card;
     $cardContainer.insertAdjacentElement("beforeend", $article);
-  }
+  });
   document.body.insertAdjacentElement("beforeend", $cardContainer);
 }
 
