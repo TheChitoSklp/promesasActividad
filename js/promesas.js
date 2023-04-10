@@ -19,8 +19,7 @@ let producto = [
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     category: "men's clothing",
-    image:
-      "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+    image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
     rating: {
       rate: 4.1,
       count: 259,
@@ -54,8 +53,7 @@ let producto = [
   },
   {
     id: 5,
-    title:
-      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
     price: 695,
     description:
       "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
@@ -133,8 +131,7 @@ let producto = [
   },
   {
     id: 11,
-    title:
-      "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+    title: "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
     price: 109,
     description:
       "3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
@@ -147,8 +144,7 @@ let producto = [
   },
   {
     id: 12,
-    title:
-      "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+    title: "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
     price: 114,
     description:
       "Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty",
@@ -201,8 +197,7 @@ let producto = [
   },
   {
     id: 16,
-    title:
-      "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
+    title: "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
     price: 29.95,
     description:
       "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
@@ -266,23 +261,46 @@ let producto = [
     },
   },
 ];
-const cardsContainer = document.getElementById("card-details");
-//producto = null; si no  existe
+// const cardsContainer = document.getElementById("card-details");
+// //producto = null; si no  existe
+// function getProducto() {
+//   return new Promise((resolve, reject) => {
+//     if (producto == null) {
+//       reject(new Error("Producto no existe"));
+//     }
+
+//     setTimeout(() => {
+//       resolve(producto);
+//     }, 2000);
+//   });
+// }
 function getProducto() {
-  return new Promise((resolve, reject) => {
-    if (producto == null) {
-      reject(new Error("Producto no existe"));
-    }
+  //FETCH
+  let promesa = fetch("https://fakestoreapi.com/products", { metod: "GET" });
+  promesa
+    .then(
+      (response) => {
+        response
+          .json()
+          .then(
+            (prods) => {
+              //crear cards (prods)
+              console.log("prods=>json()");
+              console.log(prods);
+            } //prods
+          ) //then json
+          .catch((err) => {
+            console.error("error en el formato de la respuesta:" + err.message);
+          });
+      } //response
+    ) //then;
+    .catch((error) => {
+      console.error("error en el formato de la respuesta:" + error.message);
+    });
+} //getProducto
 
-    setTimeout(() => {
-      resolve(producto);
-    }, 2000);
-  });
-}
-getProducto()
-  .then((prod) => console.log(prod))
-  .catch((err) => console.log(err.message));
+getProducto();
 
-// <h3 id="nombreProducto">{producto.title}</h3>
-// <p id="descripcionProducto">Precio:{producto.price}</p>
-// <p id="precioProducto">{producto.description}</p>
+// ya se uso arriba
+// .then((prod) => console.log(prod))
+// .catch((err) => console.log(err.message));
